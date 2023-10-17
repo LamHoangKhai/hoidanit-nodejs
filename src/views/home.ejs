@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+      background-color: #111;
+    }
+
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+      margin: 0 auto;
+    }
+
+
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #customers tr:hover {
+      background-color: #ddd;
+    }
+
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/form-create-users">Create User</a></li>
+
+  </ul>
+  <h2 style="text-align: center;">List Users</h2>
+
+  <table id="customers">
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>City</th>
+      <th>Action</th>
+    </tr>
+
+    <% ListUsers.forEach((User)=> { %>
+      <tr>
+        <td>
+          <%= User.id %>
+        </td>
+        <td>
+          <%= User.email %>
+        </td>
+        <td>
+          <%= User.name %>
+        </td>
+        <td>
+          <%= User.city %>
+        </td>
+        <td>
+          <button><a href="/form-edit-users" style="text-decoration: none;padding:4px;">Edit</a></button>
+          <button><a href="/form-edit-users" style="text-decoration: none;padding:4px;">Delete</a></button>
+        </td>
+      </tr>
+      <% }) %>
+
+
+  </table>
+  </div>
+
+</body>
+
+</html>
