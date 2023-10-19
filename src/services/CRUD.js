@@ -4,10 +4,9 @@ const getAllUsers = async () => {
   return results;
 };
 
-const getUser = async () => {
-  let id = 1;
+const getUser = async (userId) => {
   const [results, fields] = await connectDB.query(
-    `select * from Users WHERE id = ${id}`
+    `select * from Users WHERE id = ${userId[0]}`
   );
   return results;
 };

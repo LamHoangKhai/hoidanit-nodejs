@@ -85,7 +85,7 @@
 
     </ul>
     <div class="form">
-        <form action="/edit-user" method="post">
+        <form method="post" action=<%="/edit-user/" + User[0].id %> >
             <div class="input-group">
                 <label for="">Email:</label>
                 <input type="text" name="Email" value=<%=User[0].email %> />
