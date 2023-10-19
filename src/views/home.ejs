@@ -110,10 +110,9 @@
           <%= User.city %>
         </td>
         <td>
-          <button><a style="text-decoration: none;padding:4px;" href=<%="/form-edit-users/" + User.id %>
-              >Edit</a></button>
+          <button><a style="text-decoration: none;padding:4px;" href="/form-edit-users/<%= User.id %>">Edit</a></button>
 
-          <button class="delete-user" value=<%=User.id %> >Delete</button>
+          <button class="delete-user" value="<%=User.id %>">Delete</button>
         </td>
       </tr>
       <% }) %>
@@ -123,10 +122,7 @@
   </div>
 
   <script>
-    let elements = document.getElementsByClassName("delete-user");
-
-
-    Array.from(elements).forEach((element) => {
+    let elements = document.getElementsByClassName(" delete-user"); Array.from(elements).forEach((element) => {
       element.addEventListener("click", (e) => {
         let anwers = confirm("Bạn muốn delete chứ")
         if (anwers) {

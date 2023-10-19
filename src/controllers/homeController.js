@@ -1,5 +1,11 @@
 const connectDB = require("../config/database");
-const { getAllUsers, getUser } = require("../services/CRUD");
+const {
+  getAllUsers,
+  getUser,
+  updateUser,
+  createUser,
+  deleteUser,
+} = require("../services/CRUD");
 
 const getHomepage = async (req, res) => {
   const results = await getAllUsers();
@@ -12,38 +18,31 @@ const getFromCreateUsers = (req, res) => {
 
 const postCreateUser = async (req, res) => {
   const { Email, Name, City } = req.body;
-  const [results, fields] = await connectDB.query(
-    `INSERT INTO Users(email,name,city) VALUES(?,?,?) `,
-    [Email, Name, City]
-  );
-  return res.send("Thành Công");
+  await createUser({ Email, Name, City });
+  return res.redirect("/");
 };
 
 // Handle Edit User
 const getFromEditUsers = async (req, res) => {
-  const results = await getUser(req.params);
-  return res.render("form-edit-users.ejs", { User: results });
+  const result = await getUser(req.params.userId);
+  const user = result && result.length > 0 ? result[0] : {};
+  return res.render("form-edit-users.ejs", { User: user });
 };
 
 const postEditUser = async (req, res) => {
   const { Email, Name, City } = req.body;
-  const userId = req.params[0];
-  const [results, fields] = await connectDB.query(
-    `UPDATE  Users SET email = ? , name = ? ,city = ? WHERE id = ${userId} `,
-    [Email, Name, City]
-  );
-
-  return res.send("Thành Công");
+  const userId = req.params.userId;
+  await updateUser({ Email, Name, City, userId });
+  return res.redirect("/");
 };
 
 //Handle Delete User
 const postDeteleUser = async (req, res) => {
-  const userId = req.params[0];
-  const [results, fields] = await connectDB.query(
-    `DELETE FROM Users WHERE id = ${userId}`
-  );
-  return res.send("Thành Công");
+  const userId = req.params.userId;
+  await deleteUser({ userId });
+  return res.redirect("/");
 };
+
 module.exports = {
   getHomepage,
   getFromEditUsers,
