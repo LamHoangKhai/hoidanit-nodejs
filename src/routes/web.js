@@ -1,5 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 const {
   getHomepage,
   postCreateUser,
@@ -21,4 +34,13 @@ router.post("/edit-user/:userId", postEditUser);
 
 //Router Create Delete
 router.get("/delete-users/:userId", postDeteleUser);
+
+router.post("/test", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.send({ message: "No file uploaded" });
+  }
+
+  return res.send({ filename: req.file.filename });
+});
+
 module.exports = router;
